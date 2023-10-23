@@ -1,0 +1,1 @@
+from .getinventory import getinv
