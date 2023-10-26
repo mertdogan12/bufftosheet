@@ -1,12 +1,16 @@
+import os
 from dotenv import load_dotenv
 
 import buffapi
+from googlesheetapi.auth import auth
+from googlesheetapi.writeBuffData import writeInventory
+
 
 load_dotenv()
 
 inv = buffapi.getinv()
 
-for i in inv.items:
-    print("%s, %g yen" % (i.name, i.price))
+creds = auth()
+sheetid = os.getenv("SHEETID")
 
-print("Total %g yen" % inv.total_ammount)
+writeInventory(creds, sheetid, inv)

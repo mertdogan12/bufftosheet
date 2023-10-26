@@ -1,5 +1,6 @@
 import requests
 import os
+import json
 
 class Item:
     item_id = 0
@@ -20,7 +21,7 @@ class Inventory:
         self.items = items
 
 
-def getinv() -> Inventory:
+def getinv():
     cookies = {
         'Locale-Supported': 'en',
         'game': 'csgo',
@@ -52,16 +53,20 @@ def getinv() -> Inventory:
 
     response.raise_for_status()
 
-    data = response.json()["data"]
+    try:
+        data = response.json()["data"]
 
-    total_ammount = float(data["total_amount"])
-    items: list[Item] = []
+        total_ammount = float(data["total_amount"])
+        items: list[Item] = []
 
-    for item in data["items"]:
-        itemid = int(item["goods_id"])
-        name = str(item["name"])
-        price = float(item["sell_min_price"])
+        for item in data["items"]:
+            itemid = int(item["goods_id"])
+            name = str(item["name"])
+            price = float(item["sell_min_price"])
 
-        items.append(Item(itemid, name, price))
+            items.append(Item(itemid, name, price))
 
-    return Inventory(total_ammount, items)
+        return Inventory(total_ammount, items)
+    except KeyError:
+        print(json.dumps(response.json(), indent=4))
+        raise KeyError
