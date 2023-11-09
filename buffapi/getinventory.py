@@ -54,7 +54,9 @@ def getinv():
     response = requests.get('https://buff.163.com/api/market/steam_inventory',
                             params=params, cookies=cookies, headers=headers)
 
-    response.raise_for_status()
+    if response.status_code != 200:
+        print("Got status code %d while getting the inventory")
+        return None
 
     try:
         data = response.json()["data"]
@@ -70,6 +72,8 @@ def getinv():
             items.append(Item(itemid, name, price))
 
         return Inventory(total_ammount, items)
+
     except KeyError:
+        print("Error while getting the data from the inventory")
         print(json.dumps(response.json(), indent=4))
-        raise KeyError
+        return None

@@ -10,6 +10,9 @@ load_dotenv()
 
 inv = buffapi.getinv()
 
+if inv == None:
+    raise
+
 creds = auth()
 sheetid = os.getenv("SHEETID")
 
