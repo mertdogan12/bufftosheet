@@ -2,8 +2,7 @@ import os
 from dotenv import load_dotenv
 
 import buffapi
-from googlesheetapi.auth import auth
-from googlesheetapi.writeBuffData import writeInventory
+import googlesheetapi
 
 
 load_dotenv()
@@ -13,7 +12,7 @@ inv = buffapi.getinv()
 if inv == None:
     raise
 
-creds = auth()
+creds = googlesheetapi.auth()
 sheetid = os.getenv("SHEETID")
 
-writeInventory(creds, sheetid, inv)
+googlesheetapi.write_inventory(creds, sheetid, inv)

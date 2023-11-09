@@ -2,7 +2,7 @@ from buffapi.getinventory import Inventory
 from googlesheetapi.write import update_values
 
 
-def writeInventory(creds, sheetid, inv: Inventory):
+def write_inventory(creds, sheetid, inv: Inventory):
     range_name = "A2:C" + str(inv.items.__len__() + 1)
     data = []
 
@@ -11,3 +11,4 @@ def writeInventory(creds, sheetid, inv: Inventory):
                     str(item.price).replace('.', ',')])
 
     update_values(creds, sheetid, range_name, "USER_ENTERED", data)
+    print("Inserted successful the inventory data")

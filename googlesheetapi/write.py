@@ -21,10 +21,10 @@ def update_values(creds, spreadsheet_id, range_name, value_input_option,
             body=body
         ).execute()
 
-        print(f"{result.get('updatedCells')} cells updated.")
+        print("%s cells updated." % result.get('updatedCells'))
 
         return result
 
     except HttpError as error:
-        print(f"An error occurred: {error}")
-        return error
+        print("Got status code %d while updateing values in the spreed sheet" % error.status_code)
+        return None

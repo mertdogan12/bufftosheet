@@ -1,2 +1,2 @@
 from .auth import auth
-from .writeBuffData import writeInventory
+from .insert_data import write_inventory
