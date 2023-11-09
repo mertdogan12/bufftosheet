@@ -2,15 +2,17 @@ import requests
 import os
 import json
 
+
 class Item:
     item_id = 0
     name = ""
-    price= 0.0
+    price = 0.0
 
     def __init__(self, item_id: int, name: str, price: float) -> None:
         self.item_id = item_id
         self.name = name
         self.price = price
+
 
 class Inventory:
     total_ammount = 0.0
@@ -49,7 +51,8 @@ def getinv():
         'state': 'all',
     }
 
-    response = requests.get('https://buff.163.com/api/market/steam_inventory', params=params, cookies=cookies, headers=headers)
+    response = requests.get('https://buff.163.com/api/market/steam_inventory',
+                            params=params, cookies=cookies, headers=headers)
 
     response.raise_for_status()
 

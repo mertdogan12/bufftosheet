@@ -15,9 +15,9 @@ def update_values(creds, spreadsheet_id, range_name, value_input_option,
         }
 
         result = service.spreadsheets().values().update(
-            spreadsheetId=spreadsheet_id, 
+            spreadsheetId=spreadsheet_id,
             range=range_name,
-            valueInputOption=value_input_option, 
+            valueInputOption=value_input_option,
             body=body
         ).execute()
 

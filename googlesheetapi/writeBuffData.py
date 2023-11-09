@@ -7,6 +7,7 @@ def writeInventory(creds, sheetid, inv: Inventory):
     data = []
 
     for item in inv.items:
-        data.append([str(item.item_id), item.name, str(item.price).replace('.', ',')])
+        data.append([str(item.item_id), item.name,
+                    str(item.price).replace('.', ',')])
 
     update_values(creds, sheetid, range_name, "USER_ENTERED", data)

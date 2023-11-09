@@ -27,7 +27,8 @@ params = {
     'allow_tradable_cooldown': '1',
 }
 
-response = requests.get('https://buff.163.com/api/market/goods/sell_order', params=params, cookies=cookies, headers=headers)
+response = requests.get('https://buff.163.com/api/market/goods/sell_order',
+                        params=params, cookies=cookies, headers=headers)
 
 response.raise_for_status()
 
