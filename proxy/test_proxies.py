@@ -1,4 +1,5 @@
 import requests
+import sys
 
 
 def test_proxies(proxies: list[str]):
@@ -13,7 +14,10 @@ def test_proxies(proxies: list[str]):
 
         try:
             requests.get("http://google.com", proxies=proxy_server)
+        except KeyboardInterrupt:
+            sys.exit(0)
         except:
+            print(proxy + " not working")
             continue
         else:
             print(proxy + " works")
