@@ -23,6 +23,7 @@ def get_values(creds, spreadsheet_id, range_name):
               error.status_code)
         return None
 
+
 def read_inv_ids(creds, sheetid):
     ids = get_values(creds, sheetid, "A:A")
 

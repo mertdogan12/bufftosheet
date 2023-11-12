@@ -1,8 +1,10 @@
 import requests
 import json
 
+
 def getitemprices(ids: list[str]):
     return [getitemprice(id) for id in ids]
+
 
 def getitemprice(id: str):
     cookies = {

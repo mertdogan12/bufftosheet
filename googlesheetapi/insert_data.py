@@ -15,6 +15,7 @@ def write_inventory(creds, sheetid, inv: Inventory):
     update_values(creds, sheetid, range_name, "USER_ENTERED", data)
     print("Inserted successful the inventory data")
 
+
 def write_current_invvalue(creds, sheetid, item_prices):
     sum = 0
     for price in item_prices:
