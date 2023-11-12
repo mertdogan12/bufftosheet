@@ -1,4 +1,5 @@
 import os
+import sys
 from dotenv import load_dotenv
 
 import buffapi
@@ -9,8 +10,8 @@ load_dotenv()
 
 inv = buffapi.getinv()
 
-if inv == None:
-    raise
+if inv is None:
+    sys.exit()
 
 creds = googlesheetapi.auth()
 sheetid = os.getenv("SHEETID")

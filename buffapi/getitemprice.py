@@ -1,6 +1,8 @@
 import requests
 import json
 
+def getitemprices(ids: list[str]):
+    return [getitemprice(id) for id in ids]
 
 def getitemprice(id: str):
     cookies = {
@@ -39,11 +41,12 @@ def getitemprice(id: str):
 
     try:
         data = response.json()["data"]
-        price = data["items"][0]["price"]
+        price = float(data["items"][0]["price"])
 
+        print("Got itemprice from id %s: %f" % (id, price))
         return price
 
-    except KeyError:
+    except (KeyError, IndexError):
         print("Error while getting the data from the item with the id " + id)
         print("Json: " + json.dumps(response.json(), indent=4))
         return None
