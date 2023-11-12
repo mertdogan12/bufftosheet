@@ -1,7 +1,7 @@
 import requests
 import sys
 
-from proxy.read_proxies import Proxy
+from proxies.read_proxies import Proxy
 
 
 def test_proxies(proxies: list[Proxy]):
@@ -19,8 +19,9 @@ def test_proxies(proxies: list[Proxy]):
                 requests.get("http://google.com", proxies=proxy_server)
             else:
                 auth = (proxy.name, proxy.address)
-                requests.get("http://google.com", proxies=proxy_server, auth=auth)
-                
+                requests.get("http://google.com",
+                             proxies=proxy_server, auth=auth)
+
         except KeyboardInterrupt:
             sys.exit(0)
 
