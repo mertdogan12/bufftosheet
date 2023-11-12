@@ -11,7 +11,7 @@ import proxy
 load_dotenv()
 
 proxies = proxy.read_proxies()
-print(proxy.test_proxies(proxies))
+proxy.test_proxies(proxies)
 
 # creds = googlesheetapi.auth()
 # sheetid = os.getenv("SHEETID")
