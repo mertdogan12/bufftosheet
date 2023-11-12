@@ -52,3 +52,6 @@ def getitemprice(id: str):
         print("Error while getting the data from the item with the id " + id)
         print("Json: " + json.dumps(response.json(), indent=4))
         return None
+    except TimeoutError:
+        print("Connection timeout while getting data from the item with the id " + id)
+        return None

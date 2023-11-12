@@ -73,7 +73,10 @@ def getinv():
 
         return Inventory(total_ammount, items)
 
-    except KeyError:
+    except (KeyError, IndexError):
         print("Error while getting the data from the inventory")
         print(json.dumps(response.json(), indent=4))
+        return None
+    except TimeoutError:
+        print("Connection timeout while getting the data from the inventory")
         return None
