@@ -56,7 +56,7 @@ def getitemprice(id: str, proxy: proxies.Proxy):
         'allow_tradable_cooldown': '1',
     }
 
-    response = proxies.request_proxies.proxy_request('https://buff.163.com/api/market/goods/sell_order',
+    response = proxies.request_proxy('https://buff.163.com/api/market/goods/sell_order',
                                                      params=params, cookies=cookies, headers=headers, proxy=proxy)
 
     if response.status_code != 200:

@@ -2,7 +2,7 @@ import requests
 from proxies.read_proxies import Proxy
 
 
-def proxy_request(url: str, params, cookies, headers, proxy: Proxy):
+def request_proxy(url: str, params, cookies, headers, proxy: Proxy):
     proxy_server = {
         'http': 'http://' + proxy.address
     }
