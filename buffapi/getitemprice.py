@@ -7,19 +7,24 @@ import proxies
 def getitemprices(ids: list[str], proxies: list[proxies.Proxy]):
     id_pos = 0
     item_prices = []
+    wait_time = 60
 
     while id_pos < len(ids):
         for proxy in proxies:
+            if id_pos >= len(ids):
+                break
+
             item_price = getitemprice(ids[id_pos], proxy)
-
-            if item_price is None:
-                return None
-
-            item_prices.append(item_price)
             id_pos += 1
 
-        print("Waiting 10sec")
-        time.sleep(10)
+            if item_price is None:
+                ids.append(ids[id_pos])
+                continue
+
+            item_prices.append(item_price)
+
+        print("Waiting %dsec" % wait_time)
+        time.sleep(wait_time)
 
     return item_prices
 
