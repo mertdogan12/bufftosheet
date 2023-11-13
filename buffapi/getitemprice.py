@@ -57,7 +57,7 @@ def getitemprice(id: str, proxy: proxies.Proxy):
     }
 
     response = proxies.request_proxy('https://buff.163.com/api/market/goods/sell_order',
-                                                     params=params, cookies=cookies, headers=headers, proxy=proxy)
+                                     params=params, cookies=cookies, headers=headers, proxy=proxy)
 
     if response.status_code != 200:
         print("Got status code %d while getting the price from the item with the id %s" % (
