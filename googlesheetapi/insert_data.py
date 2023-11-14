@@ -21,6 +21,6 @@ def write_current_invvalue(creds, sheetid, item_prices):
     for price in item_prices:
         sum += price
 
-    timestamp = datetime.now().strftime("%d.%m.%Y %H.%M.%S")
+    timestamp = datetime.now().strftime("%d.%m.%Y %H:%M:%S")
 
     append_values(creds, sheetid, "F:G", "USER_ENTERED", [[timestamp, sum]])
