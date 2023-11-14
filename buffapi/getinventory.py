@@ -20,6 +20,7 @@ class Inventory:
     total_page = 0
     items: list[Item] = []
 
+
 def getinv():
     wait_time = 20
 
@@ -40,7 +41,7 @@ def getinv():
         time.sleep(wait_time)
 
     return inv
-    
+
 
 def inv_addpage(inv: Inventory, page: int):
     cookies = {
