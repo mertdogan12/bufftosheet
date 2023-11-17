@@ -21,6 +21,7 @@ def getitemprices(ids: list[str], proxies: list[proxies.Proxy]):
                 ids.append(ids[id_pos])
                 continue
 
+            print("Got itemprice from id %s: %f (%d/%d)" % (ids[id_pos - 1], item_price, id_pos, len(ids)))
             item_prices.append(item_price)
 
         print("Waiting %dsec" % wait_time)
@@ -72,7 +73,6 @@ def getitemprice(id: str, proxy: proxies.Proxy):
 
         price = float(data["items"][0]["price"])
 
-        print("Got itemprice from id %s: %f" % (id, price))
         return price
 
     except (KeyError, IndexError):
