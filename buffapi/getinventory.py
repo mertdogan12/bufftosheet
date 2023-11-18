@@ -29,16 +29,13 @@ def getinv():
     if inv is None:
         return None
 
-    print("Waiting %dsec" % wait_time)
-    time.sleep(wait_time)
-
     for i in range(2, inv.total_page + 1):
+        print(f"Waiting {wait_time}sec")
+        time.sleep(wait_time)
+
         inv = inv_addpage(inv, i)
         if inv is None:
             return None
-
-        print("Waiting %dsec" % wait_time)
-        time.sleep(wait_time)
 
     return inv
 
@@ -73,7 +70,8 @@ def inv_addpage(inv: Inventory, page: int):
                             params=params, cookies=cookies, headers=headers)
 
     if response.status_code != 200:
-        print("Got status code %d while getting the inventory")
+        print(
+            f"Got status code {response.status_code} while getting the inventory")
         return None
 
     try:
@@ -89,13 +87,10 @@ def inv_addpage(inv: Inventory, page: int):
 
             inv.items.append(Item(itemid, name, price))
 
-        print("Page %d added to the inventory data" % page)
+        print(f"Inventorypage {page} added to the inventory data")
         return inv
 
     except (KeyError, IndexError):
         print("Error while getting the data from the inventory")
         print(json.dumps(response.json(), indent=4))
-        return None
-    except TimeoutError:
-        print("Connection timeout while getting the data from the inventory")
         return None

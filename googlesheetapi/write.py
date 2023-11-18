@@ -21,13 +21,13 @@ def update_values(creds, spreadsheet_id, range_name, value_input_option,
             body=body
         ).execute()
 
-        print("%s cells updated." % result.get('updatedCells'))
+        print(f"{result.get('updatedCells')} cells updated.")
 
         return result
 
     except HttpError as error:
-        print("Got status code %d while updateing values in the spreed sheet" %
-              error.status_code)
+        print(
+            f"Got status code {error.status_code} while updateing values in the spreed sheet")
         return None
 
 
@@ -52,6 +52,6 @@ def append_values(creds, spreadsheet_id, range_name, value_input_option, values)
         return result
 
     except HttpError as error:
-        print("Got status code %d while appending values in the spreed sheet" %
-              error.status_code)
+        print(
+            f"Got status code {error.status_code} while appending values in the spreed sheet")
         return error

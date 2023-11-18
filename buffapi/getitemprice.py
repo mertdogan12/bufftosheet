@@ -14,17 +14,20 @@ def getitemprices(ids: list[str], proxies: list[proxies.Proxy]):
             if id_pos >= len(ids):
                 break
 
-            item_price = getitemprice(ids[id_pos], proxy)
+            id = ids[id_pos]
+
+            item_price = getitemprice(id, proxy)
             id_pos += 1
 
             if item_price is None:
-                ids.append(ids[id_pos - 1])
+                ids.append(id)
                 continue
 
-            print("Got itemprice from id %s: %f (%d/%d)" % (ids[id_pos - 1], item_price, id_pos, len(ids)))
+            print(
+                f"Got the itemprice from the item with the id {id}: {item_price}¥ ({id_pos - 1}/{len(ids)})")
             item_prices.append(item_price)
 
-        print("Waiting %dsec" % wait_time)
+        print(f"Waiting {wait_time}sec")
         time.sleep(wait_time)
 
     return item_prices
@@ -61,8 +64,8 @@ def getitemprice(id: str, proxy: proxies.Proxy):
                                      params=params, cookies=cookies, headers=headers, proxy=proxy)
 
     if response.status_code != 200:
-        print("Got status code %d while getting the price from the item with the id %s" % (
-            response.status_code, id))
+        print(
+            f"Got status code {response.status_code} while getting the price from the item with the id {id}")
         return None
 
     try:
@@ -76,6 +79,6 @@ def getitemprice(id: str, proxy: proxies.Proxy):
         return price
 
     except (KeyError, IndexError):
-        print("Error while getting the data from the item with the id " + id)
+        print(f"Error while getting the data from the item with the id {id}")
         print("Json: " + json.dumps(response.json(), indent=4))
         return None

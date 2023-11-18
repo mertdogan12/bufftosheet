@@ -19,8 +19,8 @@ def get_values(creds, spreadsheet_id, range_name):
         return result
 
     except HttpError as error:
-        print("Got status code %d while reading values in the spreed sheet" %
-              error.status_code)
+        print(
+            f"Got status code {error.status_code} while reading values in the spreed sheet")
         return None
 
 

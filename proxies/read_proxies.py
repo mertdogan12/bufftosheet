@@ -27,6 +27,6 @@ def read_proxies():
 
         proxies.append(Proxy(address, name, password))
 
-    print("Found %d proxies" % len(proxies))
+    print(f"Found {len(proxies)} proxies")
 
     return proxies

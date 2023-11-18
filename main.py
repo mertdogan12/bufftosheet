@@ -4,10 +4,14 @@ from dotenv import load_dotenv
 
 import buffapi
 import googlesheetapi
+import pyfiglet
 
 
 load_dotenv()
 
+print(pyfiglet.figlet_format("BuffToSheet"))
+
+print("Getting inventory data")
 inv = buffapi.getinv()
 
 if inv is None:
