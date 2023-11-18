@@ -7,12 +7,12 @@ import json
 class Item:
     item_id = 0
     name = ""
-    price = 0.0
+    new: bool | None = False
 
-    def __init__(self, item_id: int, name: str, price: float) -> None:
+    def __init__(self, item_id: int, name: str, new: bool | None) -> None:
         self.item_id = item_id
         self.name = name
-        self.price = price
+        self.new = new
 
 
 class Inventory:
@@ -83,9 +83,8 @@ def inv_addpage(inv: Inventory, page: int):
         for item in data["items"]:
             itemid = int(item["goods_id"])
             name = str(item["name"])
-            price = float(item["sell_min_price"])
 
-            inv.items.append(Item(itemid, name, price))
+            inv.items.append(Item(itemid, name, None))
 
         print(f"Inventorypage {page} added to the inventory data")
         return inv

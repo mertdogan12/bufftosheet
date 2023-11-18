@@ -1,6 +1,8 @@
 from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
 
+from buffapi.getinventory import Item
+
 
 def get_values(creds, spreadsheet_id, range_name):
 
@@ -24,10 +26,26 @@ def get_values(creds, spreadsheet_id, range_name):
         return None
 
 
-def read_inv_ids(creds, sheetid):
+def read_items(creds, sheetid):
+    items_data = get_values(creds, sheetid, "A2:C")
+    items = []
+
+    if not items_data:
+        return None
+
+    for item_data in items_data:
+        id = item_data[0]
+        name = item_data[1]
+        new = True if item_data[2] == "yes" else False
+
+        items.append(Item(id, name, new))
+
+    return items
+
+def read_ids(creds, sheetid):
     ids = get_values(creds, sheetid, "A:A")
 
     if ids == None:
         return None
 
-    return [id[0] for id in ids["values"][1:]]
+    return [id[0] for id in ids["values"]]

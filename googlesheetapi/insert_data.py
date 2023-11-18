@@ -1,5 +1,5 @@
 from buffapi.getinventory import Inventory
-from googlesheetapi.read import read_inv_ids
+from googlesheetapi.read import read_ids
 from googlesheetapi.write import append_values, update_values
 from datetime import datetime
 
@@ -7,7 +7,7 @@ from datetime import datetime
 def write_inventory(creds, sheetid, inv: Inventory):
     range_name = "A2:C"
     data = []
-    ids = read_inv_ids(creds, sheetid)
+    ids = read_ids(creds, sheetid)
 
     if not ids:
         return None
