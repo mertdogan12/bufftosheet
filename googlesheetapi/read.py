@@ -33,7 +33,7 @@ def read_items(creds, sheetid):
     if not items_data:
         return None
 
-    for item_data in items_data:
+    for item_data in items_data.get("values"):
         id = item_data[0]
         name = item_data[1]
         new = True if item_data[2] == "yes" else False
@@ -41,6 +41,7 @@ def read_items(creds, sheetid):
         items.append(Item(id, name, new))
 
     return items
+
 
 def read_ids(creds, sheetid):
     ids = get_values(creds, sheetid, "A:A")

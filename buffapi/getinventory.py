@@ -29,6 +29,8 @@ def getinv():
     if inv is None:
         return None
 
+    print(f"Total inventory pages: {inv.total_page}")
+
     for i in range(2, inv.total_page + 1):
         print(f"Waiting {wait_time}sec")
         time.sleep(wait_time)

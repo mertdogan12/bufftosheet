@@ -15,11 +15,11 @@ working_proxies = proxies.test_proxies(proxy_list)
 creds = googlesheetapi.auth()
 sheetid = os.getenv("SHEETID")
 
-ids = googlesheetapi.read_inv_ids(creds, sheetid)
-if ids is None:
+items = googlesheetapi.read_items(creds, sheetid)
+if items is None:
     sys.exit()
 
-prices = buffapi.getitemprices(ids, working_proxies)
+prices = buffapi.getitemprices(items, working_proxies)
 if prices is None:
     sys.exit()
 

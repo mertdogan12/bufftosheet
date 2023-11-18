@@ -28,4 +28,4 @@ def write_current_invvalue(creds, sheetid, item_prices):
     timestamp = datetime.now().strftime("%d.%m.%Y %H:%M:%S")
 
     append_values(creds, sheetid, "F:G", "USER_ENTERED", [[timestamp, sum]])
-    print(f"Inserted successful the current inventory value: {item_prices}¥")
+    print(f"Inserted successful the current inventory value: {sum}¥")

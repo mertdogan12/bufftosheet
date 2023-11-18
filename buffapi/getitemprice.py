@@ -2,29 +2,30 @@ import json
 import time
 
 import proxies
+from .getinventory import Item
 
 
-def getitemprices(ids: list[str], proxies: list[proxies.Proxy]):
-    id_pos = 0
+def getitemprices(items: list[Item], proxies: list[proxies.Proxy]):
+    item_pos = 0
     item_prices = []
     wait_time = 60
 
-    while id_pos < len(ids):
+    while item_pos < len(items):
         for proxy in proxies:
-            if id_pos >= len(ids):
+            if item_pos >= len(items):
                 break
 
-            id = ids[id_pos]
+            item = items[item_pos]
 
-            item_price = getitemprice(id, proxy)
-            id_pos += 1
+            item_price = getitemprice(item.item_id, proxy)
+            item_pos += 1
 
             if item_price is None:
-                ids.append(id)
+                items.append(item)
                 continue
 
             print(
-                f"Got the itemprice from the item with the id {id}: {item_price}¥ ({id_pos - 1}/{len(ids)})")
+                f"Got the itemprice from the item {item.name}: {item_price}¥ ({item_pos}/{len(items)})")
             item_prices.append(item_price)
 
         print(f"Waiting {wait_time}sec")
@@ -33,7 +34,7 @@ def getitemprices(ids: list[str], proxies: list[proxies.Proxy]):
     return item_prices
 
 
-def getitemprice(id: str, proxy: proxies.Proxy):
+def getitemprice(id: int, proxy: proxies.Proxy):
     cookies = {
         'Locale-Supported': 'en',
         'game': 'csgo',
@@ -53,7 +54,7 @@ def getitemprice(id: str, proxy: proxies.Proxy):
 
     params = {
         'game': 'csgo',
-        'goods_id': id,
+        'goods_id': str(id),
         'page_num': '1',
         'sort_by': 'default',
         'mode': '',
