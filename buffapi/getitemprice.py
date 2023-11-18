@@ -18,7 +18,7 @@ def getitemprices(ids: list[str], proxies: list[proxies.Proxy]):
             id_pos += 1
 
             if item_price is None:
-                ids.append(ids[id_pos])
+                ids.append(ids[id_pos - 1])
                 continue
 
             print("Got itemprice from id %s: %f (%d/%d)" % (ids[id_pos - 1], item_price, id_pos, len(ids)))
