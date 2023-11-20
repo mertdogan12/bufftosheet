@@ -24,7 +24,7 @@ sheetid = os.getenv("SHEETID")
 
 print('')
 print("Getting already saved items")
-ids = googlesheetapi.read_int_line(creds, sheetid, ranges.ID_RANGE)
+ids = googlesheetapi.read_num_line(creds, sheetid, ranges.ID_RANGE, int)
 
 if not ids:
     sys.exit()

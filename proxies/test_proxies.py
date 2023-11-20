@@ -5,7 +5,7 @@ from proxies.read_proxies import Proxy
 
 
 def test_proxies(proxies: list[Proxy]):
-    working = []
+    working: list[Proxy] = []
 
     print("Testing proxies")
 

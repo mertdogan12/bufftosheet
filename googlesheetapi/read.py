@@ -28,7 +28,7 @@ def get_values(creds, spreadsheet_id, range_name):
 
 def read_items(creds, sheetid, range_name):
     items_data = get_values(creds, sheetid, range_name)
-    items = []
+    items: list[Item] = []
 
     if not items_data:
         return None
@@ -43,10 +43,17 @@ def read_items(creds, sheetid, range_name):
     return items
 
 
-def read_int_line(creds, sheetid, range_name):
+def read_num_line(creds, sheetid, range_name, type: type):
+    if type is not float and type is not int:
+        raise TypeError
+
     values = get_values(creds, sheetid, range_name)
 
     if values == None:
         return None
 
-    return [int(value[0]) for value in values["values"]]
+    lines: list[str] = [value[0] for value in values["values"]]
+    prices = [line.replace('¥', '').replace(
+        '.', '').replace(',', '.') for line in lines]
+
+    return [type(price) for price in prices]
