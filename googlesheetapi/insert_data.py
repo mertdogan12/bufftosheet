@@ -20,12 +20,15 @@ def write_inventory(creds, sheetid, inv: Inventory, ids: list[int], range_name):
 def write_current_invvalue(creds, sheetid, sum, range_name):
     timestamp = datetime.now().strftime("%d.%m.%Y %H:%M:%S")
 
-    append_values(creds, sheetid, range_name, "USER_ENTERED", [[timestamp, sum]])
+    append_values(creds, sheetid, range_name,
+                  "USER_ENTERED", [[timestamp, sum]])
     print(f"Inserted successful the current inventory value: {sum}¥")
+
 
 def write_diff(creds, sheetid, current_sum, old_sum, range_name):
     timestamp = datetime.now().strftime("%d.%m.%Y %H:%M:%S")
     diff = current_sum - old_sum
-    
-    append_values(creds, sheetid, range_name, "USER_ENTERED", [[timestamp, diff]])
+
+    append_values(creds, sheetid, range_name,
+                  "USER_ENTERED", [[timestamp, diff]])
     print(f"Inserted successful the win/lose: {diff}¥")

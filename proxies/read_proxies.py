@@ -12,7 +12,7 @@ class Proxy:
 def read_proxies():
     proxy_file = open(os.getenv("PROXYFILE") or "./proxies.txt")
 
-    proxies:list[Proxy] = []
+    proxies: list[Proxy] = []
 
     for line in proxy_file.readlines():
         l = line.split(':')

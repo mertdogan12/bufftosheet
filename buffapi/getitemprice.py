@@ -14,6 +14,7 @@ class ItemPrice:
         self.price = price
         self.new = new
 
+
 def getitemprices(items: list[Item], proxies: list[proxies.Proxy]):
     item_pos = 0
     item_prices: list[ItemPrice] = []

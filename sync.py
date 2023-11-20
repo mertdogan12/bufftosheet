@@ -25,7 +25,8 @@ if not items:
 
 print("")
 print("Getting sums")
-sums = googlesheetapi.read_num_line(creds, sheetid, ranges.SUM_RANGE_PRICE, float)
+sums = googlesheetapi.read_num_line(
+    creds, sheetid, ranges.SUM_RANGE_PRICE, float)
 if not sums:
     sys.exit()
 
@@ -47,4 +48,5 @@ for price in prices:
 
 
 googlesheetapi.write_current_invvalue(creds, sheetid, sum, ranges.SUM_RANGE)
-googlesheetapi.write_diff(creds, sheetid, sum_without_new, sums[-1], ranges.DIFF)
+googlesheetapi.write_diff(
+    creds, sheetid, sum_without_new, sums[-1], ranges.DIFF)
