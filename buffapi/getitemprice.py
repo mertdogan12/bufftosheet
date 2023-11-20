@@ -1,4 +1,5 @@
 import json
+from random import shuffle
 import sys
 import time
 
@@ -19,10 +20,16 @@ def getitemprices(items: list[Item], proxies: list[proxies.Proxy]):
     item_pos = 0
     item_prices: list[ItemPrice] = []
     wait_time = 60
+    max_items = 20
 
     while item_pos < len(items):
-        for proxy in proxies:
+        shuffle(proxies)
+
+        for i, proxy in enumerate(proxies):
             if item_pos >= len(items):
+                break
+
+            if i >= max_items:
                 break
 
             item = items[item_pos]
@@ -30,7 +37,7 @@ def getitemprices(items: list[Item], proxies: list[proxies.Proxy]):
             item_price = getitemprice(item.item_id, proxy)
             item_pos += 1
 
-            if not item_price:
+            if item_price is None:
                 items.append(item)
                 continue
 
@@ -40,7 +47,7 @@ def getitemprices(items: list[Item], proxies: list[proxies.Proxy]):
 
             item_prices.append(ItemPrice(item_price, item.new))
             print(
-                f"Got the itemprice from the item {item.name}: {item_price}¥ ({item_pos}/{len(items)})")
+                    f"Got the itemprice from the item {item.name}: {item_price}¥ ({item_pos}/{len(items)}) | Proxy: {proxy.address}")
 
         print(f"Waiting {wait_time}sec")
         time.sleep(wait_time)
@@ -55,7 +62,7 @@ def getitemprice(id: int, proxy: proxies.Proxy):
     }
 
     headers = {
-        'Accept': 'application/json, text/javascript, */*; q=0.01',
+        'Accept': 'application/json,',
         'Accept-Language': 'en-US,en;q=0.5',
         'X-Requested-With': 'XMLHttpRequest',
         'DNT': '1',
