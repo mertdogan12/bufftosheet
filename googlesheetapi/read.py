@@ -44,9 +44,9 @@ def read_items(creds, sheetid):
 
 
 def read_ids(creds, sheetid):
-    ids = get_values(creds, sheetid, "A:A")
+    ids = get_values(creds, sheetid, "A2:A")
 
     if ids == None:
         return None
 
-    return [id[0] for id in ids["values"]]
+    return [int(id[0]) for id in ids["values"]]

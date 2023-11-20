@@ -14,10 +14,19 @@ print(pyfiglet.figlet_format("BuffToSheet"))
 print("Getting inventory data")
 inv = buffapi.getinv()
 
-if inv is None:
+if not inv:
     sys.exit()
 
 creds = googlesheetapi.auth()
 sheetid = os.getenv("SHEETID")
 
-googlesheetapi.write_inventory(creds, sheetid, inv)
+print('')
+print("Getting already saved items")
+ids = googlesheetapi.read_ids(creds, sheetid)
+
+if not ids:
+    sys.exit()
+
+print('')
+print("Inserting inventory")
+googlesheetapi.write_inventory(creds, sheetid, inv, ids)

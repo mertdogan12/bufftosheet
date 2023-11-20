@@ -1,19 +1,17 @@
 from buffapi.getinventory import Inventory
-from googlesheetapi.read import read_ids
 from googlesheetapi.write import append_values, update_values
 from datetime import datetime
 
 
-def write_inventory(creds, sheetid, inv: Inventory):
+def write_inventory(creds, sheetid, inv: Inventory, ids: list[int]):
     range_name = "A2:C"
     data = []
-    ids = read_ids(creds, sheetid)
 
     if not ids:
         return None
 
     for item in inv.items:
-        new = "no" if str(item.item_id) in ids else "yes"
+        new = "no" if item.item_id in ids else "yes"
         data.append([str(item.item_id), item.name, new])
 
     update_values(creds, sheetid, range_name, "USER_ENTERED", data)
