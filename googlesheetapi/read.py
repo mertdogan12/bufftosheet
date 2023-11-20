@@ -26,8 +26,8 @@ def get_values(creds, spreadsheet_id, range_name):
         return None
 
 
-def read_items(creds, sheetid):
-    items_data = get_values(creds, sheetid, "A2:C")
+def read_items(creds, sheetid, range_name):
+    items_data = get_values(creds, sheetid, range_name)
     items = []
 
     if not items_data:
@@ -43,10 +43,10 @@ def read_items(creds, sheetid):
     return items
 
 
-def read_ids(creds, sheetid):
-    ids = get_values(creds, sheetid, "A2:A")
+def read_int_line(creds, sheetid, range_name):
+    values = get_values(creds, sheetid, range_name)
 
-    if ids == None:
+    if values == None:
         return None
 
-    return [int(id[0]) for id in ids["values"]]
+    return [int(value[0]) for value in values["values"]]

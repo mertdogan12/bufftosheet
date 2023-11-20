@@ -6,6 +6,8 @@ import buffapi
 import googlesheetapi
 import pyfiglet
 
+import ranges
+
 
 load_dotenv()
 
@@ -22,11 +24,11 @@ sheetid = os.getenv("SHEETID")
 
 print('')
 print("Getting already saved items")
-ids = googlesheetapi.read_ids(creds, sheetid)
+ids = googlesheetapi.read_int_line(creds, sheetid, ranges.ID_RANGE)
 
 if not ids:
     sys.exit()
 
 print('')
 print("Inserting inventory")
-googlesheetapi.write_inventory(creds, sheetid, inv, ids)
+googlesheetapi.write_inventory(creds, sheetid, inv, ids, ranges.ITEM_RANGE)

@@ -5,6 +5,7 @@ import buffapi
 
 import googlesheetapi
 import proxies
+import ranges
 
 
 load_dotenv()
@@ -15,7 +16,7 @@ working_proxies = proxies.test_proxies(proxy_list)
 creds = googlesheetapi.auth()
 sheetid = os.getenv("SHEETID")
 
-items = googlesheetapi.read_items(creds, sheetid)
+items = googlesheetapi.read_items(creds, sheetid, ranges.ITEM_RANGE)
 if items is None:
     sys.exit()
 
@@ -23,4 +24,4 @@ prices = buffapi.getitemprices(items, working_proxies)
 if prices is None:
     sys.exit()
 
-googlesheetapi.write_current_invvalue(creds, sheetid, prices)
+googlesheetapi.write_current_invvalue(creds, sheetid, prices, ranges.SUM_RANGE)
