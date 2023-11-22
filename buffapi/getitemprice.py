@@ -20,7 +20,7 @@ def getitemprices(items: list[Item], proxies: list[proxies.Proxy]):
     item_pos = 0
     item_prices: list[ItemPrice] = []
     wait_time = 60
-    max_items = 20
+    max_items = 50
 
     while item_pos < len(items):
         shuffle(proxies)
