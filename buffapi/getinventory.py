@@ -5,14 +5,16 @@ import json
 
 
 class Item:
-    item_id = 0
-    name = ""
-    new: bool | None = False
+    item_id: int
+    name: str
+    price: float | None
+    pic_url: str
 
-    def __init__(self, item_id: int, name: str, new: bool | None) -> None:
+    def __init__(self, item_id: int, name: str, price: float | None, pic_url: str) -> None:
         self.item_id = item_id
         self.name = name
-        self.new = new
+        self.price = price
+        self.pic_url = pic_url
 
 
 class Inventory:
@@ -83,8 +85,14 @@ def inv_addpage(inv: Inventory, page: int):
         for item in data["items"]:
             itemid = int(item["goods_id"])
             name = str(item["name"])
+            pic_url = str(item["icon_url"])
 
-            inv.items.append(Item(itemid, name, None))
+            inv.items.append(Item(
+                item_id=itemid,
+                name=name,
+                price=None,
+                pic_url=pic_url,
+            ))
 
         print(f"Got the inventory page {page}/{inv.total_page}")
         return inv

@@ -3,7 +3,7 @@ from googlesheetapi.write import append_values, update_values
 from datetime import datetime
 
 
-def write_inventory(creds, sheetid, inv: Inventory, ids: list[int], range_name):
+def write_inventory(creds, sheetid, inv: Inventory, range_name):
     data = []
 
     if not ids:
