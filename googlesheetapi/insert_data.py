@@ -3,15 +3,20 @@ from googlesheetapi.write import append_values, update_values
 from datetime import datetime
 
 
-def write_inventory(creds, sheetid, inv: Inventory, range_name):
+def write_inventory(creds, sheetid, inv: Inventory, ids: list[int|float], range_name):
     data = []
 
     if not ids:
         return None
 
     for item in inv.items:
-        new = "no" if item.item_id in ids else "yes"
-        data.append([str(item.item_id), item.name, new])
+        new = "yes"
+        if item.item_id in ids:
+            new = "no"
+            ids.remove(item.item_id)
+
+        data.append([item.item_id, item.name, new, item.pic_url])
+
 
     update_values(creds, sheetid, range_name, "USER_ENTERED", data)
     print("Inserted successful the inventory data")

@@ -34,11 +34,15 @@ def read_items(creds, sheetid, range_name):
         return None
 
     for item_data in items_data.get("values"):
-        id = item_data[0]
-        name = item_data[1]
-        new = True if item_data[2] == "yes" else False
+        if len(item_data) == 0:
+            continue
 
-        items.append(Item(id, name, new))
+        items.append(Item(
+            item_id=item_data[0],
+            name=item_data[1],
+            new=True if item_data[2] == "yes" else False,
+            pic_url=item_data[3],
+        ))
 
     return items
 

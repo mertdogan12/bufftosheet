@@ -7,18 +7,19 @@ import json
 class Item:
     item_id: int
     name: str
-    price: float | None
+    new: bool | None
     pic_url: str
 
-    def __init__(self, item_id: int, name: str, price: float | None, pic_url: str) -> None:
+    def __init__(self, item_id: int, name: str, new: bool | None, pic_url: str) -> None:
         self.item_id = item_id
         self.name = name
-        self.price = price
+        self.new = new
         self.pic_url = pic_url
 
 
 class Inventory:
     total_ammount = 0.0
+    sold_ammount = 0.0
     total_page = 0
     items: list[Item] = []
 
@@ -90,7 +91,7 @@ def inv_addpage(inv: Inventory, page: int):
             inv.items.append(Item(
                 item_id=itemid,
                 name=name,
-                price=None,
+                new=None,
                 pic_url=pic_url,
             ))
 
